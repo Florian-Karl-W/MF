@@ -12,14 +12,22 @@ function Post() {
 
   let navigate = useNavigate();
 
+  /**
+   * CE CODE CA PLANTE
+   * FAUT TROUVER UN MOYEN DE FETCH LE POST BY ID SANS QUE CA FASSE UNE INFINITE LOOP
+  */
   useEffect(() => {
-    axios.get(`http://localhost:5000/posts/byId/${id}`).then((response) => {
-      setPostObject(response.data);
-    });
+    // axios.get(`http://localhost:5000/posts/byId/${id}`, {
+    //   headers: { accessToken: localStorage.getItem("accessToken") },
+    // }).then((response) => {
+    //   setPostObject(response.data);
+    // });
 
-    axios.get(`http://localhost:5000/comments/${id}`).then((response) => {
-      setComments(response.data);
-    });
+    // axios.get(`http://localhost:5000/comments/${id}`, {
+    //   headers: { accessToken: localStorage.getItem("accessToken") },
+    // }).then((response) => {
+    //   setComments(response.data);
+    // });
   });
 
   const addComment = () => {
@@ -58,7 +66,7 @@ function Post() {
       .then(() => {
         setComments(
           comments.filter((val) => {
-            return val.id != id;
+            return val.id !== id;
           })
         );
       });

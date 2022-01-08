@@ -7,16 +7,19 @@ import { AuthContext } from "../helpers/AuthContext";
 
 function CreatePost() {
   const { authState } = useContext(AuthContext);
-
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const initialValues = {
     title: "",
     postText: "",
   };
 
+  const goTo = whereTo => {
+    navigate(whereTo);
+  }
+
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
-      navigate.push("/login");
+      goTo("/login");
     }
   }, []);
   const validationSchema = Yup.object().shape({
@@ -30,7 +33,7 @@ function CreatePost() {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((response) => {
-        navigate.push("/");
+        goTo("/");
       });
   };
 
@@ -45,7 +48,7 @@ function CreatePost() {
           <label>Title: </label>
           <ErrorMessage name="title" component="span" />
           <Field
-            autocomplete="off"
+            autoComplete="off"
             id="inputCreatePost"
             name="title"
             placeholder="(Ex. Title...)"
@@ -53,7 +56,7 @@ function CreatePost() {
           <label>Post: </label>
           <ErrorMessage name="postText" component="span" />
           <Field
-            autocomplete="off"
+            autoComplete="off"
             id="inputCreatePost"
             name="postText"
             placeholder="(Ex. Post...)"

@@ -38,7 +38,11 @@ function App() {
           });
         }
       });
-  }, [authState]);
+  /** ICI AUSSI LE [AUTHSTATE] FAIT PLANTER LE CODE
+   * JE SAIS PAS SI C'EST NECESSAIRE
+   * DU COUP J'AI ENLEVE
+   */
+  }, []);
 
   const logout = () => {
     localStorage.removeItem("accessToken");
@@ -69,6 +73,9 @@ function App() {
             </div>
           </div>
           <Routes>
+            {/*
+              D'après la doc c'est bien comme ça qu'il faut écrire donc bizarre que ça marche pas
+            */}
             <Route path="/" element={<Home />} />
             <Route path="/createpost" element={<CreatePost />} />
             <Route path="/post/:id" element={<Post />} />

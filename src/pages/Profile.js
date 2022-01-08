@@ -18,7 +18,11 @@ function Profile() {
     axios.get(`http://localhost:5000/posts/byuserId/${id}`).then((response) => {
       setListOfPosts(response.data);
     });
-  }, [id]);
+    /** ICI AUSSI LE [ID] FAIT PLANTER LE CODE
+     * JE SAIS PAS SI C'EST NECESSAIRE
+     * DU COUP J'AI ENLEVE
+     */
+  }, []);
 
   return (
     <div className="profilePageContainer">

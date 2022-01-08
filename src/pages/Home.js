@@ -9,9 +9,14 @@ function Home() {
   const [listOfPosts, setListOfPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
   const { authState } = useContext(AuthContext);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
-  useEffect((navigate) => {
+  // set dynamic post navigation
+  const navigateToPost = id => {
+    navigate(`/post/${id}`)
+  }
+
+  useEffect(() => {
     if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     } else {
@@ -74,9 +79,7 @@ function Home() {
             <div className="title"> {value.title} </div>
             <div
               className="body"
-              onClick={() => {
-                navigate(`/post/${value.id}`);
-              }}
+              onClick={() => navigateToPost(value.id)}
             >
               {value.postText}
             </div>
